@@ -46,7 +46,7 @@ runChecks = (callback)->
 module.exports =
 
 	check: (req, res)->
-		cb = ->
+		cb = (isOk)->
 			if isOk
 				res.send 200
 			else
