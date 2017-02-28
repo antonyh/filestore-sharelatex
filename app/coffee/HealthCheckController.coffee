@@ -34,26 +34,21 @@ checkFileConvert = (callback)->
 	], callback
 
 
-isOk = true
-
-q = async.queue (task, callback)->
-	task(callback)
-
-
 runChecks = (callback)->
 	async.parallel [checkFileConvert, checkCanStoreFiles], (err)->
-		if err? 
+		if err?
 			logger.err err:err, "Health check: error running"
 			isOk = false
 		else
 			isOk = true
-		callback()
+		callback(isOk)
 
 module.exports =
 
 	check: (req, res)->
-		if isOk
-			res.send 200
-		else
-			res.send 500
-		q.push runChecks # run in background 1 at a time
+		cb = ->
+			if isOk
+				res.send 200
+			else
+				res.send 500
+		runChecks cb
