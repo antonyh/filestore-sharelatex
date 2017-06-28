@@ -39,9 +39,7 @@ Thumbs.db
 test/IntergrationTests/js/*
 data/*/*
 
-app.js
 cluster.js
-app/js/*
 test/IntergrationTests/js/*
 test/UnitTests/js/*
 cookies.txt
